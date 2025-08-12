@@ -5,7 +5,8 @@
 # .NET Core build folders
 bin/
 obj/
-
+obj/project.nuget.cache
+obj/minimal-api.csproj.nuget.dgspec.json
 # Common node modules locations
 /node_modules
 /wwwroot/node_modules
