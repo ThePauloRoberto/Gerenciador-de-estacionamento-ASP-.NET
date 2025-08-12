@@ -10,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IAdministradorServico, AdministradorServico>();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
 builder.Services.AddDbContext<DbContexto>(
   options =>
   {
@@ -39,6 +43,8 @@ app.MapPost("/login", ([FromBody]LoginDTO loginDTO, IAdministradorServico admini
 });
 
 
+app.UseSwagger();
+app.UseSwaggerUI();
 
 Console.WriteLine("http://localhost:5043");
 app.Run();
