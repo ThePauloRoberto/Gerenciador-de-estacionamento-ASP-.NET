@@ -5,7 +5,7 @@ namespace MinimalApi.Dominio.Interfaces;
 
 public interface IVeiculoServico
 {
-  List<Veiculo> Todos(int paginas = 1, string? nome = null, string? marca = null);
+  List<Veiculo> Todos(int? paginas = 1, string? nome = null, string? marca = null);
 
   Veiculo? BuscaPorId(string id);
 
