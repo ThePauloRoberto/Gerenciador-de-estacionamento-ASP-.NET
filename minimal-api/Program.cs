@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinamalApi.Dominio.Entidades;
+using MinamalApi.Dominio.ModelViews;
 using MinamalApi.Dominio.Servicos;
 using MinamalApi.Infraestrutura.DB;
 using MinimalApi.Dominio.Interfaces;
@@ -28,7 +29,7 @@ var app = builder.Build();
 
 
 
-app.MapGet("/", () => "Eai pessoal!");
+app.MapGet("/", () => Results.Json(new Home()));
 
 app.MapPost("/login", ([FromBody]LoginDTO loginDTO, IAdministradorServico administradorServico) =>
 {
