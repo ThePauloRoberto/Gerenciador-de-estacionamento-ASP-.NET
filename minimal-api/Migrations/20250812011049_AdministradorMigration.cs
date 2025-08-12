@@ -31,6 +31,11 @@ namespace minimal_api.Migrations
                     table.PrimaryKey("PK_Administradores", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Administradores",
+                columns: new[] { "Id", "Email", "Perfil", "Senha" },
+                values: new object[] { "1", "administrador@teste.com", "Adm", "123456" });
         }
 
         /// <inheritdoc />

@@ -11,7 +11,7 @@ using MinamalApi.Infraestrutura.DB;
 namespace minimal_api.Migrations
 {
     [DbContext(typeof(DbContexto))]
-    [Migration("20250812003432_AdministradorMigration")]
+    [Migration("20250812011049_AdministradorMigration")]
     partial class AdministradorMigration
     {
         /// <inheritdoc />
@@ -48,6 +48,15 @@ namespace minimal_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Administradores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Email = "administrador@teste.com",
+                            Perfil = "Adm",
+                            Senha = "123456"
+                        });
                 });
 #pragma warning restore 612, 618
         }
