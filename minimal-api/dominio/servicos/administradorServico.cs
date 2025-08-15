@@ -1,9 +1,9 @@
-using MinamalApi.Dominio.Entidades;
-using MinamalApi.Infraestrutura.DB;
+using MinimalApi.Dominio.Entidades;
+using MinimalApi.Infraestrutura.DB;
 using MinimalApi.Dominio.Interfaces;
 using MinimalApi.DTOs;
 
-namespace MinamalApi.Dominio.Servicos;
+namespace MinimalApi.Dominio.Servicos;
 
 public class AdministradorServico : IAdministradorServico
 {

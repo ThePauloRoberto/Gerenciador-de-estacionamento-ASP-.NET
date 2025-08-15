@@ -1,7 +1,7 @@
-  using Microsoft.EntityFrameworkCore;
-using MinamalApi.Dominio.Entidades;
+using Microsoft.EntityFrameworkCore;
+using MinimalApi.Dominio.Entidades;
 
-namespace MinamalApi.Infraestrutura.DB;
+namespace MinimalApi.Infraestrutura.DB;
 
 public class DbContexto : DbContext
 {

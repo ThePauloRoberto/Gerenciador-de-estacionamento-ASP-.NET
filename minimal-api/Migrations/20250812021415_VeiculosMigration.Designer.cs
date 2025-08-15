@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MinamalApi.Infraestrutura.DB;
+using MinimalApi.Infraestrutura.DB;
 
 #nullable disable
 
@@ -24,7 +24,7 @@ namespace minimal_api.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("MinamalApi.Dominio.Entidades.Administrador", b =>
+            modelBuilder.Entity("MinimalApi.Dominio.Entidades.Administrador", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace minimal_api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MinamalApi.Dominio.Entidades.Veiculo", b =>
+            modelBuilder.Entity("MinimalApi.Dominio.Entidades.Veiculo", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()

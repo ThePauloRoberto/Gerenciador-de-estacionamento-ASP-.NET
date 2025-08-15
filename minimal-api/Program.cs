@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MinamalApi.Dominio.Entidades;
+using MinimalApi.Dominio.Entidades;
 using MinimalApi.Dominio.ModelViews;
-using MinamalApi.Dominio.Servicos;
-using MinamalApi.Infraestrutura.DB;
+using MinimalApi.Dominio.Servicos;
+using MinimalApi.Infraestrutura.DB;
 using MinimalApi.Dominio.Interfaces;
 using MinimalApi.DTOs;
 using MinimalApi.Dominio.Enums;
