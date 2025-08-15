@@ -6,6 +6,7 @@ using MinamalApi.Dominio.Servicos;
 using MinamalApi.Infraestrutura.DB;
 using MinimalApi.Dominio.Interfaces;
 using MinimalApi.DTOs;
+using MinimalApi.Dominio.Enums;
 
 #region Builder
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddScoped<IVeiculoServico, VeiculoServico>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 
 builder.Services.AddDbContext<DbContexto>(
@@ -45,6 +48,87 @@ app.MapPost("/Administradores/login", ([FromBody] LoginDTO loginDTO, IAdministra
   {
     return Results.Unauthorized();
   }
+}).WithTags("Administrador");
+
+app.MapGet("/Administradores", ([FromQuery] int? pagina, IAdministradorServico administradorServico) =>
+{
+var adms = new List<AdministradorModelView>();
+
+var Administradores = administradorServico.Todos(pagina);
+
+  foreach (var adm in Administradores)
+  {
+    adms.Add(new AdministradorModelView
+    {
+      Id = adm.Id,
+      Email = adm.Email,
+      Perfil = adm.Perfil
+    });
+  }
+
+  return Results.Ok(adms);
+
+}).WithTags("Administrador");
+
+
+app.MapGet("/administradores/{id}", ([FromRoute] string id, IAdministradorServico administradorServico) =>
+{
+
+  var administrador = administradorServico.BuscarPorId(id);
+
+  if (administrador == null) return Results.NotFound();
+
+  return Results.Ok(new AdministradorModelView
+  {
+    Id = administrador.Id,
+    Email = administrador.Email,
+    Perfil = administrador.Perfil
+  });
+}).WithTags("Administrador");
+
+
+app.MapPost("/Administradores", ([FromBody] AdministradorDTO administradorDTO, IAdministradorServico administradorServico) =>
+{
+  var validacao = new ErrosDeValidacao
+  {
+    Mensagens = new List<string>()
+  };
+
+  if (!string.IsNullOrEmpty(administradorDTO.Email))
+  {
+    validacao.Mensagens.Add("Email não pode ser vazio!");
+  }
+  if (!string.IsNullOrEmpty(administradorDTO.Senha))
+  {
+    validacao.Mensagens.Add("Senha não pode ser vazio!");
+  }
+  if (!string.IsNullOrEmpty(administradorDTO.Perfil.ToString()))
+  {
+    validacao.Mensagens.Add("Perfil não pode ser vazio!");
+  }
+
+
+  if (validacao.Mensagens.Count() > 0)
+  {
+    return Results.BadRequest(validacao);
+  }
+
+  var administrador = new Administrador
+  {
+    Email = administradorDTO.Email,
+    Senha = administradorDTO.Senha,
+    Perfil = administradorDTO.Perfil.ToString() ?? Perfil.Editor.ToString()
+  };
+  administradorServico.Incluir(administrador);
+
+  return Results.Created($"/administrador/{administrador.Id}", new AdministradorModelView
+  {
+    Id = administrador.Id,
+    Email = administrador.Email,
+    Perfil = administrador.Perfil
+  });
+
+
 }).WithTags("Administrador");
 #endregion
 
@@ -151,6 +235,6 @@ app.MapDelete("/veiculos/{id}", ([FromRoute] string id, IVeiculoServico veiculoS
 app.UseSwagger();
 app.UseSwaggerUI();
 
-Console.WriteLine("http://localhost:5043");
+Console.WriteLine("A aplicação está rodando na url: http://localhost:5042");
 app.Run();
 #endregion
